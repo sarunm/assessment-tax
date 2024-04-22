@@ -4,6 +4,7 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/labstack/echo/v4"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -15,10 +16,12 @@ type jwtCustomClaims struct {
 }
 
 func Login(c echo.Context) error {
-	username := c.FormValue("username")
-	password := c.FormValue("password")
+	//username := c.FormValue("username")
+	//password := c.FormValue("password")
+	adminUsername := os.Getenv("ADMIN_USERNAME")
+	adminPassword := os.Getenv("ADMIN_PASSWORD")
 
-	if username != "adminTax" && password != "admin!" {
+	if adminUsername != "adminTax" && adminPassword != "admin!" {
 		return echo.ErrUnauthorized
 	}
 

@@ -4,11 +4,11 @@ services:
       context: .
       dockerfile: ./Dockerfile
     ports:
-      - '8080:8080'
+      - '${PORT}:8080'
     depends_on:
       - postgres
-#    environment:
-#      DATABASE_URL: postgres://postgres:postgres@postgres:5432/ktaxes
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
     volumes:
       - .:/go/src/ktaxes
   postgres:
@@ -19,3 +19,11 @@ services:
       POSTGRES_DB: ktaxes
     ports:
       - '5432:5432'
+  
+  
+#  postgres://postgres:postgres@postgres:5432/ktaxes
+#  
+#  export PORT=8080
+#  export DATABASE_URL=postgres://postgres:postgres@postgres:5432/ktaxes
+#  export ADMIN_USERNAME=adminTax
+#  export ADMIN_PASSWORD=admin!
